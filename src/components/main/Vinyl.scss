@@ -1,9 +1,16 @@
-#vinyl {
+#vinyl-spin {
   animation: spin 1s infinite linear;
   transform-origin: center;
 }
-#arm {
+
+#arm-move {
   animation: switch 1s ease-in;
+  transform-origin: top;
+  transform-box: fill-box;
+  animation-fill-mode: forwards;
+}
+#arm {
+  animation: switch2 1s ease-in;
   transform-origin: top;
   transform-box: fill-box;
   animation-fill-mode: forwards;
@@ -16,12 +23,28 @@
     transform: rotate(360deg);
   }
 }
+@keyframes spin2 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(60deg);
+  }
+}
 @keyframes switch {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(15deg);
+  }
+}
+@keyframes switch2 {
+  from {
+    transform: rotate(15deg);
+  }
+  to {
+    transform: rotate(0deg);
   }
 }
 .svg-container {

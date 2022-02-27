@@ -1,14 +1,31 @@
 import React, { useState, useEffect } from "react";
 
-const Chord = () => {
+const Chord = (props) => {
   const [homeKey, setHomeKey] = useState("");
+  const [progression, setProgression] = useState("");
+  const clickPrev = () => {
+    setHomeKey("");
+    const e = document.getElementById("vinyl-spin");
+    e.setAttribute("id", "vinyl");
+    const e2 = document.getElementById("arm-move");
+    e2.setAttribute("id", "arm");
+  };
   const clickSelect = () => {
     const e = document.getElementById("option1");
     const strUser = e.value;
     setHomeKey(strUser);
   };
+  const clickStart = () => {
+    const e3 = document.getElementById("option2");
+    const strUser = e3.value;
+    setProgression(strUser);
+    const e = document.getElementById("vinyl");
+    e.setAttribute("id", "vinyl-spin");
+    const e2 = document.getElementById("arm");
+    e2.setAttribute("id", "arm-move");
+  };
   useEffect(() => {
-    console.log(`You clicked ${homeKey} times`);
+    console.log(`You clicked ${homeKey} ${progression} times`);
   });
   return (
     <div>
@@ -22,9 +39,38 @@ const Chord = () => {
             </select>
           </div>
           <div className="buttons-group">
-            <input type="button" value="<<" />
+            <input
+              type="button"
+              value="<<"
+              onClick={() => {
+                clickPrev();
+                props.setRunningText("Choose a chord!");
+              }}
+            />
             <input type="button" value="" disabled />
-            <input type="button" value="|| >" />
+            {progression.length ? (
+              <input
+                type="button"
+                value="|| "
+                onClick={() => {
+                  const e = document.getElementById("vinyl-spin");
+                  e.setAttribute("id", "vinyl");
+                  const e2 = document.getElementById("arm-move");
+                  e2.setAttribute("id", "arm");
+                  setProgression("");
+                  props.setRunningText("Choose a progression");
+                }}
+              />
+            ) : (
+              <input
+                type="button"
+                value="|| >"
+                onClick={() => {
+                  clickStart();
+                  props.setRunningText("Now playing...");
+                }}
+              />
+            )}
           </div>
         </div>
       ) : (
@@ -51,6 +97,7 @@ const Chord = () => {
               value="Select"
               onClick={() => {
                 clickSelect();
+                props.setRunningText("Choose progression!!!");
               }}
             />{" "}
             <input type="button" value="" disabled />{" "}

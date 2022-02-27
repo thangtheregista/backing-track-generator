@@ -1,10 +1,10 @@
 import React from "react";
 
-const RunningText = () => {
+const RunningText = (props) => {
   return (
     <div className="running-text-container">
       <div className="running-text-wrapper">
-        <p>RunningText</p>
+        <p>{props.runningText}</p>
       </div>
     </div>
   );

@@ -10,20 +10,19 @@
     overflow-x: hidden;
     width: 400px;
     p {
-      width: 1px;
+      width: 100%;
       text-align: center;
+      display: inline-block;
       animation: infinite-running 10s linear infinite;
     }
   }
 }
 @keyframes infinite-running {
   0% {
-    margin-left: -100px;
-    top: 0;
+    margin-left: -400px;
   }
 
   100% {
-    margin-left: 450px;
-    top: 0;
+    margin-left: 400px;
   }
 }
