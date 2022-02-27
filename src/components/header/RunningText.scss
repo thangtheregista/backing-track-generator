@@ -1,0 +1,29 @@
+.running-text-container {
+  width: 100%;
+  height: 100px;
+  background-color: blue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .running-text-wrapper {
+    background-color: red;
+    overflow-x: hidden;
+    width: 400px;
+    p {
+      width: 1px;
+      text-align: center;
+      animation: infinite-running 10s linear infinite;
+    }
+  }
+}
+@keyframes infinite-running {
+  0% {
+    margin-left: -100px;
+    top: 0;
+  }
+
+  100% {
+    margin-left: 450px;
+    top: 0;
+  }
+}
