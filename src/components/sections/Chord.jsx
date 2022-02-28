@@ -3,17 +3,21 @@ import React, { useState, useEffect } from "react";
 const Chord = (props) => {
   const [homeKey, setHomeKey] = useState("");
   const [progression, setProgression] = useState("");
+
+  const clickSelect = () => {
+    const strUser = document.getElementById("option1").value;
+    setHomeKey(strUser);
+    props.setRunningText("Choose progression!!!");
+  };
   const clickPrev = () => {
     setHomeKey("");
+    setProgression("");
+    props.setRunningText("Choose a chord!");
+
     const e = document.getElementById("vinyl-spin");
     e.setAttribute("id", "vinyl");
     const e2 = document.getElementById("arm-move");
     e2.setAttribute("id", "arm");
-  };
-  const clickSelect = () => {
-    const e = document.getElementById("option1");
-    const strUser = e.value;
-    setHomeKey(strUser);
   };
   const clickStart = () => {
     const e3 = document.getElementById("option2");
@@ -44,7 +48,6 @@ const Chord = (props) => {
               value="<<"
               onClick={() => {
                 clickPrev();
-                props.setRunningText("Choose a chord!");
               }}
             />
             <input type="button" value="" disabled />
@@ -97,7 +100,6 @@ const Chord = (props) => {
               value="Select"
               onClick={() => {
                 clickSelect();
-                props.setRunningText("Choose progression!!!");
               }}
             />{" "}
             <input type="button" value="" disabled />{" "}
