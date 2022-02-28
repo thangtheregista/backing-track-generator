@@ -1,109 +1,129 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const Chord = (props) => {
-  const [homeKey, setHomeKey] = useState("");
-  const [progression, setProgression] = useState("");
-
-  const clickSelect = () => {
-    const strUser = document.getElementById("option1").value;
-    setHomeKey(strUser);
-    props.setRunningText("Choose progression!!!");
+  const { setRunningText, chord, setChord, progression, setProgression } =
+    props;
+  const next = () => {
+    const str = document.getElementById("option1").value;
+    setChord(str);
+    setRunningText("Choose progression!!!");
   };
-  const clickPrev = () => {
-    setHomeKey("");
+  const previous = () => {
+    setChord("");
     setProgression("");
-    props.setRunningText("Choose a chord!");
+    setRunningText("Choose a chord!");
+  };
+  const play = () => {
+    const str = document.getElementById("option2").value;
+    setProgression(str);
+    setRunningText("Now playing...");
+
+    const e = document.getElementById("vinyl");
+    e.setAttribute("id", "vinyl-spin");
+    const e2 = document.getElementById("arm");
+    e2.setAttribute("id", "arm-move");
+  };
+  const pause = () => {
+    setProgression("");
+    setRunningText("Choose progression!!!");
 
     const e = document.getElementById("vinyl-spin");
     e.setAttribute("id", "vinyl");
     const e2 = document.getElementById("arm-move");
     e2.setAttribute("id", "arm");
   };
-  const clickStart = () => {
-    const e3 = document.getElementById("option2");
-    const strUser = e3.value;
-    setProgression(strUser);
-    const e = document.getElementById("vinyl");
-    e.setAttribute("id", "vinyl-spin");
-    const e2 = document.getElementById("arm");
-    e2.setAttribute("id", "arm-move");
+  const stop = () => {
+    setChord("");
+    setProgression("");
+    setRunningText("Choose a chord!");
+
+    const e = document.getElementById("vinyl-spin");
+    e.setAttribute("id", "vinyl");
+    const e2 = document.getElementById("arm-move");
+    e2.setAttribute("id", "arm");
   };
-  useEffect(() => {
-    console.log(`You clicked ${homeKey} ${progression} times`);
-  });
   return (
-    <div>
-      {homeKey.length ? (
-        <div id="two">
-          <div className="options">
-            <select id="option2">
-              <option value="actual value 1">I-V</option>
-              <option value="actual value 2">I-ii</option>
-              <option value="actual value 3">I-IV-V</option>
-            </select>
-          </div>
-          <div className="buttons-group">
+    <div className="chord-container">
+      {chord && !progression ? (
+        <div>
+          <select id="option2" size="4">
+            <option value="actual value 1">A</option>
+            <option value="actual value 2">B</option>
+            <option value="actual value 3">C</option>
+            <option value="actual value 4">D</option>
+            <option value="actual value 5">E</option>
+            <option value="actual value 6">F</option>
+            <option value="actual value 7">G</option>
+          </select>
+          <div>
             <input
               type="button"
               value="<<"
               onClick={() => {
-                clickPrev();
+                previous();
               }}
             />
             <input type="button" value="" disabled />
-            {progression.length ? (
-              <input
-                type="button"
-                value="|| "
-                onClick={() => {
-                  const e = document.getElementById("vinyl-spin");
-                  e.setAttribute("id", "vinyl");
-                  const e2 = document.getElementById("arm-move");
-                  e2.setAttribute("id", "arm");
-                  setProgression("");
-                  props.setRunningText("Choose a progression");
-                }}
-              />
-            ) : (
-              <input
-                type="button"
-                value="|| >"
-                onClick={() => {
-                  clickStart();
-                  props.setRunningText("Now playing...");
-                }}
-              />
-            )}
+            <input
+              type="button"
+              value="[]>"
+              onClick={() => {
+                play();
+              }}
+            />
+          </div>
+        </div>
+      ) : chord && progression ? (
+        <div>
+          <select size="4" disabled>
+            <option value="actual value 1">A</option>
+            <option value="actual value 2">B</option>
+            <option value="actual value 3">C</option>
+            <option value="actual value 4">D</option>
+            <option value="actual value 5">E</option>
+            <option value="actual value 6">F</option>
+            <option value="actual value 7">G</option>
+          </select>
+          <div>
+            <input
+              type="button"
+              value="O"
+              onClick={() => {
+                stop();
+              }}
+            />
+            <input type="button" value="" disabled />
+            <input
+              type="button"
+              value="[]"
+              onClick={() => {
+                pause();
+              }}
+            />
           </div>
         </div>
       ) : (
-        <div className="one">
-          {" "}
-          <div className="options">
-            {" "}
-            <select id="option1">
-              {" "}
-              <option value="actual value 1">A</option>{" "}
-              <option value="actual value 2">B</option>{" "}
-              <option value="actual value 3">C</option>{" "}
-              <option value="actual value 3">D</option>{" "}
-              <option value="actual value 3">E</option>{" "}
-              <option value="actual value 3">F</option>{" "}
-              <option value="actual value 3">G</option>{" "}
-            </select>{" "}
-          </div>{" "}
-          <div className="buttons-group">
-            {" "}
-            <input type="button" value="" disabled />{" "}
+        <div>
+          <select id="option1" size="4">
+            <option value="actual value 1">A</option>
+            <option value="actual value 2">B</option>
+            <option value="actual value 3">C</option>
+            <option value="actual value 4">D</option>
+            <option value="actual value 5">E</option>
+            <option value="actual value 6">F</option>
+            <option value="actual value 7">G</option>
+          </select>
+          <div>
+            <input type="button" value="" disabled />
+            <input type="button" value="" disabled />
             <input
               type="button"
-              value="Select"
+              value=">>"
               onClick={() => {
-                clickSelect();
+                next();
               }}
-            />{" "}
-            <input type="button" value="" disabled />{" "}
-          </div>{" "}
+            />
+          </div>
         </div>
       )}
     </div>

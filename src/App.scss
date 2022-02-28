@@ -3,7 +3,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 100vh;
   .container {
     width: 500px;
+    border-style: groove;
+    border-width: thick;
   }
 }

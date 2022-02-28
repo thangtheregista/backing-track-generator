@@ -9,12 +9,20 @@ import React, { useState, useEffect } from "react";
 
 function App() {
   const [runningText, setRunningText] = useState("Choose a chord");
+  const [chord, setChord] = useState("");
+  const [progression, setProgression] = useState("");
   return (
     <div className="App">
       <div className="container">
         <RunningText runningText={runningText} />
         <Vinyl />
-        <Chord setRunningText={setRunningText} />
+        <Chord
+          setRunningText={setRunningText}
+          chord={chord}
+          setChord={setChord}
+          progression={progression}
+          setProgression={setProgression}
+        />
       </div>
     </div>
   );
