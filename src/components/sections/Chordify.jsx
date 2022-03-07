@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const Chord = (props) => {
-  const { setRunningText, chord, setChord, progression, setProgression } =
-    props;
+  const {
+    setRunningText,
+    chord,
+    setChord,
+    progression,
+    setProgression,
+    findScale,
+
+    convertToStr,
+  } = props;
+  //Choose chord
   const next = () => {
     const str = document.getElementById("option1").value;
     setChord(str);
     setRunningText("Choose progression!!!");
+    findScale(str);
   };
+
   const previous = () => {
     setChord("");
     setProgression("");
@@ -17,7 +28,7 @@ const Chord = (props) => {
     const str = document.getElementById("option2").value;
     setProgression(str);
     setRunningText("Now playing...");
-
+    convertToStr(str, chord);
     const e = document.getElementById("vinyl");
     e.setAttribute("id", "vinyl-spin");
     const e2 = document.getElementById("arm");
@@ -26,7 +37,6 @@ const Chord = (props) => {
   const pause = () => {
     setProgression("");
     setRunningText("Choose progression!!!");
-
     const e = document.getElementById("vinyl-spin");
     e.setAttribute("id", "vinyl");
     const e2 = document.getElementById("arm-move");
@@ -47,13 +57,11 @@ const Chord = (props) => {
       {chord && !progression ? (
         <div>
           <select id="option2" size="4">
-            <option value="actual value 1">A</option>
-            <option value="actual value 2">B</option>
-            <option value="actual value 3">C</option>
-            <option value="actual value 4">D</option>
-            <option value="actual value 5">E</option>
-            <option value="actual value 6">F</option>
-            <option value="actual value 7">G</option>
+            <option value="I-V-vi-IV">I-V-vi-IV</option>
+            <option value="I-IV-V-IV">I-IV-V-IV</option>
+            <option value="I-vi-IV-V">I-vi-IV-V</option>
+            <option value="I-V-iv-iii">I-V-iv-iii</option>
+            <option value="IV-I-IV-V">IV-I-IV-V</option>
           </select>
           <div>
             <input
@@ -76,13 +84,11 @@ const Chord = (props) => {
       ) : chord && progression ? (
         <div>
           <select size="4" disabled>
-            <option value="actual value 1">A</option>
-            <option value="actual value 2">B</option>
-            <option value="actual value 3">C</option>
-            <option value="actual value 4">D</option>
-            <option value="actual value 5">E</option>
-            <option value="actual value 6">F</option>
-            <option value="actual value 7">G</option>
+            <option value="I-V-vi-IV">I-V-vi-IV</option>
+            <option value="I-IV-V-IV">I-IV-V-IV</option>
+            <option value="I-vi-IV-V">I-vi-IV-V</option>
+            <option value="I-V-iv-iii">I-V-iv-iii</option>
+            <option value="IV-I-IV-V">IV-I-IV-V</option>
           </select>
           <div>
             <input
@@ -105,13 +111,13 @@ const Chord = (props) => {
       ) : (
         <div>
           <select id="option1" size="4">
-            <option value="actual value 1">A</option>
-            <option value="actual value 2">B</option>
-            <option value="actual value 3">C</option>
-            <option value="actual value 4">D</option>
-            <option value="actual value 5">E</option>
-            <option value="actual value 6">F</option>
-            <option value="actual value 7">G</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+            <option value="F">F</option>
+            <option value="G">G</option>
           </select>
           <div>
             <input type="button" value="" disabled />
