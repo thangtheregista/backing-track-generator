@@ -9,14 +9,14 @@
     height: 80px;
     div {
       width: 30%;
-      input {
+      button {
         width: 100%;
         border-style: ridge;
         outline: none;
         border-bottom: none;
         cursor: pointer;
       }
-      input:active {
+      button:active {
         transform: translateY(2px);
       }
     }

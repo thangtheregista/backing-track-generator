@@ -1,5 +1,13 @@
 import React, { useEffect } from "react";
 
+import {
+  BiPause,
+  BiPlay,
+  BiStopCircle,
+  BiChevronsRight,
+  BiChevronsLeft,
+} from "react-icons/bi";
+
 const Chord = (props) => {
   const {
     setRunningText,
@@ -8,7 +16,7 @@ const Chord = (props) => {
     progression,
     setProgression,
     findScale,
-
+    chordProg,
     convertToStr,
   } = props;
   //Choose chord
@@ -33,6 +41,7 @@ const Chord = (props) => {
     e.setAttribute("id", "vinyl-spin");
     const e2 = document.getElementById("arm");
     e2.setAttribute("id", "arm-move");
+    alert(chordProg);
   };
   const pause = () => {
     setProgression("");
@@ -64,21 +73,37 @@ const Chord = (props) => {
             <option value="IV-I-IV-V">IV-I-IV-V</option>
           </select>
           <div>
-            <input
+            {/* <input
               type="button"
               value="<<"
               onClick={() => {
                 previous();
               }}
-            />
-            <input type="button" value="" disabled />
-            <input
+            /> */}
+            <button
+              onClick={() => {
+                previous();
+              }}
+            >
+              <BiChevronsLeft />
+            </button>
+            {/* <input type="button" value="" disabled /> */}
+            <button type="button" disabled></button>
+
+            {/* <input
               type="button"
               value="[]>"
               onClick={() => {
                 play();
               }}
-            />
+            /> */}
+            <button
+              onClick={() => {
+                play();
+              }}
+            >
+              <BiPlay />
+            </button>
           </div>
         </div>
       ) : chord && progression ? (
@@ -91,21 +116,38 @@ const Chord = (props) => {
             <option value="IV-I-IV-V">IV-I-IV-V</option>
           </select>
           <div>
-            <input
+            {/* <input
               type="button"
               value="O"
               onClick={() => {
                 stop();
               }}
             />
-            <input type="button" value="" disabled />
-            <input
+            <input type="button" value="" disabled /> */}
+
+            <button
+              onClick={() => {
+                stop();
+              }}
+            >
+              <BiStopCircle />
+            </button>
+            <button type="button" disabled></button>
+
+            {/* <input
               type="button"
               value="[]"
               onClick={() => {
                 pause();
               }}
-            />
+            /> */}
+            <button
+              onClick={() => {
+                pause();
+              }}
+            >
+              <BiPause />
+            </button>
           </div>
         </div>
       ) : (
@@ -120,15 +162,26 @@ const Chord = (props) => {
             <option value="G">G</option>
           </select>
           <div>
-            <input type="button" value="" disabled />
-            <input type="button" value="" disabled />
-            <input
+            {/* <input type="button" value="" disabled /> */}
+            <button type="button" disabled></button>
+
+            {/* <input type="button" value="" disabled /> */}
+            <button type="button" disabled></button>
+
+            {/* <input
               type="button"
               value=">>"
               onClick={() => {
                 next();
               }}
-            />
+            /> */}
+            <button
+              onClick={() => {
+                next();
+              }}
+            >
+              <BiChevronsRight />
+            </button>
           </div>
         </div>
       )}

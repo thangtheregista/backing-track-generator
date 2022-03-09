@@ -101,7 +101,7 @@ function App() {
           progression={progression}
           setProgression={setProgression}
           findScale={findScale}
-          scale={scale}
+          chordProg={chordProg}
           convertToStr={convertToStr}
         />
       </div>
